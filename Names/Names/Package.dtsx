@@ -1,0 +1,1049 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/12/2015 8:06:03 PM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="MATT-LAPTOP"
+  DTS:CreatorName="MATT-LAPTOP\Matt"
+  DTS:DTSID="{F829A8EE-B60D-44FC-93AF-5F763D81FE92}"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.2100.60"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{25B08370-7D4C-4673-BCF1-AAA6FC9D2E91}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FF_CM_Forename]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{CB0C46EF-FA3B-4746-B7A9-F6199D578654}"
+      DTS:ObjectName="FF_CM_Forename">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\Matt\Documents\GitHub\Names\Forename_Autumn2014.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Forename"
+              DTS:DTSID="{B04A7FA1-CFCF-48DC-ABB9-DBE1C76C50D5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Count"
+              DTS:DTSID="{9FFF07E5-A3B6-4C6F-A6F8-53176DE8C946}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FF_CM_Surname]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{3042b6e2-672e-4a8f-abe1-5818346d64b7}"
+      DTS:ObjectName="FF_CM_Surname">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\Matt\Documents\GitHub\Names\Surname_Autumn2014.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Surname"
+              DTS:DTSID="{0D583F68-616A-4E23-88C9-739BF877097C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="5"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Count"
+              DTS:DTSID="{0E9DC14D-AF5B-4F5D-8EE1-47EAFAFAF95C}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\EXEC_Create_Objects"
+      DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{12AD3A1A-30B5-4C1F-A2DB-B0634B48621F}"
+      DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EXEC_Create_Objects"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{B54F70DF-964E-439A-902F-16C276DE5C87}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="&#xA;if ((select count(1) from sys.schemas where name = 'Names') = 0)&#xA;BEGIN&#xA;&#x9;EXEC sp_executesql N'CREATE SCHEMA [Names] AUTHORIZATION [dbo]'&#xA;END&#xA;&#xA;-- Forename&#xA;if ((select count(1) from sys.tables where name = 'Forename' and SCHEMA_NAME(schema_id) = 'Names') = 0)&#xA;BEGIN&#xA;&#x9;CREATE TABLE [Names].[Forename] (&#xA;&#x9;&#x9;[Forename_ID] [int] identity(1,1) NOT NULL PRIMARY KEY&#xA;&#x9;&#x9;,[Forename] varchar(50) NOT NULL&#xA;&#x9;&#x9;,[Count] varchar(5) NOT NULL&#xA;&#x9;)&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE [Names].[Forename]&#xA;END&#xA;&#xA;if ((select count(1) from sys.views where name = 'vw_Forename' and SCHEMA_NAME(schema_id) = 'Names') = 0)&#xA;BEGIN&#xA;&#x9;EXECUTE(N'&#xA;&#x9;CREATE VIEW [Names].[vw_Forename]&#xA;&#x9;AS&#xA;&#x9;select&#xA;&#x9;&#x9;Forename_ID&#xA;&#x9;&#x9;,Forename=case (charindex('''', forename))&#xA;&#x9;&#x9;&#x9;when 0 then upper(substring(forename,1,1)) + lower(substring(forename,2,49))&#xA;&#x9;&#x9;&#x9;when 2 then upper(substring(forename,1,1)) + '''' + upper(substring(forename,3,1)) + lower(substring(forename,4,47))&#xA;&#x9;&#x9;&#x9;else upper(substring(forename,1,1)) + lower(substring(forename,2,49))&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;,Count&#xA;&#x9;from&#xA;&#x9;&#x9;names.forename')&#xA;END&#xA;&#xA;-- Surname&#xA;if ((select count(1) from sys.tables where name = 'Surname' and SCHEMA_NAME(schema_id) = 'Names') = 0)&#xA;BEGIN&#xA;&#x9;CREATE TABLE [Names].[Surname] (&#xA;&#x9;&#x9;[Surname_ID] [int] identity(1,1) NOT NULL PRIMARY KEY&#xA;&#x9;&#x9;,[Surname] varchar(50) NOT NULL&#xA;&#x9;&#x9;,[Count] varchar(5) NOT NULL&#xA;&#x9;)&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;&#x9;TRUNCATE TABLE [Names].[Surname]&#xA;END&#xA;&#xA;if ((select count(1) from sys.views where name = 'vw_Surname' and SCHEMA_NAME(schema_id) = 'Names') = 0)&#xA;BEGIN&#xA;&#x9;EXECUTE(N'&#xA;&#x9;CREATE VIEW [Names].[vw_Surname]&#xA;&#x9;AS&#xA;&#x9;select&#xA;&#x9;&#x9;Surname_ID&#xA;&#x9;&#x9;,Surname=case (charindex('''', surname))&#xA;&#x9;&#x9;&#x9;when 0 then upper(substring(surname,1,1)) + lower(substring(surname,2,49))&#xA;&#x9;&#x9;&#x9;when 2 then upper(substring(surname,1,1)) + '''' + upper(substring(surname,3,1)) + lower(substring(surname,4,47))&#xA;&#x9;&#x9;&#x9;else upper(substring(surname,1,1)) + lower(substring(surname,2,49))&#xA;&#x9;&#x9;end&#xA;&#x9;&#x9;,Count&#xA;&#x9;from&#xA;&#x9;&#x9;names.surname')&#xA;END&#xA;&#xA;-- USP&#xA;if ((select count(1) from sys.procedures where name = 'USP_Random_Names' and SCHEMA_NAME(schema_id) = 'Names') &lt;&gt; 0)&#xA;&#x9;DROP PROCEDURE [Names].[USP_Random_Names]&#xA;go&#xA;-- =============================================&#xA;-- Author:&#x9;&#x9;Matt Smith&#xA;-- Create date: 12 May 2015&#xA;-- Description:&#x9;Creates random names&#xA;-- =============================================&#xA;CREATE PROCEDURE [Names].[USP_Random_Names]&#xA;&#x9;@Count int = 1&#xA;AS&#xA;BEGIN&#xA;&#x9;SET NOCOUNT ON;&#xA;&#xA;&#x9;IF OBJECT_ID('tempdb..#names') IS NOT NULL&#xA;&#x9;&#x9;DROP TABLE #names&#xA;&#x9;CREATE TABLE #names(&#xA;&#x9;&#x9;&#x9;name varchar(101)&#xA;&#x9;&#x9;&#x9;,forename varchar(50)&#xA;&#x9;&#x9;&#x9;,surname varchar(50)&#xA;&#x9;&#x9;)&#xA;&#x9; &#xA;&#x9;declare @counter int&#xA;&#x9;set @counter = 0&#xA;&#x9;while @counter &lt; @Count&#xA;&#x9;BEGIN&#xA;&#x9;&#xA;&#x9;&#x9;declare @maxRandValue1 smallint&#xA;&#x9;&#x9;declare @maxRandValue2 smallint&#xA;&#x9;&#x9;declare @minRandValue smallint = 0&#xA;&#x9;&#x9;declare @surname varchar(50)&#xA;&#x9;&#x9;declare @forename varchar(50)&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;declare @forenameInt smallint&#xA;&#x9;&#x9;declare @surnameInt smallint&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;Set @maxRandValue1 = (select count(1) from Names.vw_Forename)&#xA;&#x9;&#x9;Set @maxRandValue2 = (select count(1) from Names.vw_Surname)&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;Set @forenameInt = (select cast(((@maxRandValue1 + 1) - @minRandValue) * Rand() + @minRandValue As smallint))&#xA;&#x9;&#x9;Set @surnameInt = (select cast(((@maxRandValue2 + 1) - @minRandValue) * Rand() + @minRandValue As smallint))&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;Set @forename = (select forename from Names.vw_Forename where Forename_ID = @forenameInt)&#xA;&#x9;&#x9;Set @surname = (select surname from Names.vw_Surname where Surname_ID = @surnameInt)&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;insert into #names (name, forename, surname) select @forename + ' ' + @surname, @forename, @surname&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;set @counter = @counter + 1&#xA;&#x9;end&#xA;&#x9;&#xA;&#x9;select name, forename, surname from #names&#xA;&#xA;END&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQC_Forename"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{81E693B3-5B66-4E6C-853E-040F661036AC}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQC_Forename">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{ECB7E02B-84BC-4A5D-9828-F1E39E0FE523}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="TotalCount">
+          <DTS:VariableValue
+            DTS:DataType="3">0</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQC_Forename\DFT_Forename"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{B1838CA7-2596-4327-B37F-3ABDC6873F5D}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DFT_Forename"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames"
+                  componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="2057"
+                  name="FF_SRC_Forenames"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[FF_CM_Forename]"
+                      connectionManagerRefId="Package.ConnectionManagers[FF_CM_Forename]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].Columns[Forename]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].ExternalColumns[Forename]"
+                          length="50"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].Columns[Forename]"
+                          name="Forename"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].Columns[Count]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].ExternalColumns[Count]"
+                          length="5"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].Columns[Count]"
+                          name="Count"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].ExternalColumns[Forename]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Forename" />
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].ExternalColumns[Count]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          name="Count" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE_DST_Forename"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Names].[Forename]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Connections[OleDbConnection]"
+                      connectionManagerID="{B54F70DF-964E-439A-902F-16C276DE5C87}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[OLE_CM_AdventureWorks2012]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input].Columns[Forename]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Forename"
+                          externalMetadataColumnId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input].ExternalColumns[Forename]"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].Columns[Forename]" />
+                        <inputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input].Columns[Count]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="5"
+                          cachedName="Count"
+                          externalMetadataColumnId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input].ExternalColumns[Count]"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output].Columns[Count]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input].ExternalColumns[Forename_ID]"
+                          dataType="i4"
+                          name="Forename_ID" />
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input].ExternalColumns[Forename]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Forename" />
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input].ExternalColumns[Count]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          name="Count" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQC_Forename\DFT_Forename\Total Row Count"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Total Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::TotalCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\SEQC_Forename\DFT_Forename\Total Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQC_Forename\DFT_Forename\Total Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\SEQC_Forename\DFT_Forename\Total Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\SEQC_Forename\DFT_Forename.Paths[Flat File Source Output]"
+                  endId="Package\SEQC_Forename\DFT_Forename\Total Row Count.Inputs[Row Count Input 1]"
+                  name="Flat File Source Output"
+                  startId="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames.Outputs[Flat File Source Output]" />
+                <path
+                  refId="Package\SEQC_Forename\DFT_Forename.Paths[Row Count Output 1]"
+                  endId="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\SEQC_Forename\DFT_Forename\Total Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SEQC_Surname"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{56ba4ab3-df05-4f6c-a83e-b00503442158}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SEQC_Surname">
+      <DTS:Variables>
+        <DTS:Variable
+          DTS:CreationName=""
+          DTS:DTSID="{37b6800a-c764-4ffd-a89a-db3f82569bce}"
+          DTS:IncludeInDebugDump="6789"
+          DTS:Namespace="User"
+          DTS:ObjectName="TotalCount">
+          <DTS:VariableValue
+            DTS:DataType="3">0</DTS:VariableValue>
+        </DTS:Variable>
+      </DTS:Variables>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\SEQC_Surname\DFT_Surname"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{b4e71c5b-73cd-4479-b584-0863b81741ab}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="DFT_Surname"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname"
+                  componentClassID="{D23FD76B-F51D-420F-BBCB-19CBF6AC1AB4}"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="2057"
+                  name="FF_SRC_Surname"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[FF_CM_Surname]"
+                      connectionManagerRefId="Package.ConnectionManagers[FF_CM_Surname]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].Columns[Count]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].ExternalColumns[Count]"
+                          length="5"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].Columns[Count]"
+                          name="Count"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].Columns[Surname]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].ExternalColumns[Surname]"
+                          length="50"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].Columns[Surname]"
+                          name="Surname"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].ExternalColumns[Count]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          name="Count" />
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].ExternalColumns[Surname]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Surname" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE_DST_Surname"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[Names].[Surname]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Connections[OleDbConnection]"
+                      connectionManagerID="{B54F70DF-964E-439A-902F-16C276DE5C87}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[OLE_CM_AdventureWorks2012]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input].Columns[Count]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="5"
+                          cachedName="Count"
+                          externalMetadataColumnId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input].ExternalColumns[Count]"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].Columns[Count]" />
+                        <inputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input].Columns[Surname]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Surname"
+                          externalMetadataColumnId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input].ExternalColumns[Surname]"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output].Columns[Surname]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input].ExternalColumns[Count]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          name="Count" />
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input].ExternalColumns[Surname_ID]"
+                          dataType="i4"
+                          name="Surname_ID" />
+                        <externalMetadataColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input].ExternalColumns[Surname]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="Surname" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\SEQC_Surname\DFT_Surname\Total Row Count"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Total Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::TotalCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\SEQC_Surname\DFT_Surname\Total Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\SEQC_Surname\DFT_Surname\Total Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\SEQC_Surname\DFT_Surname\Total Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\SEQC_Surname\DFT_Surname.Paths[Flat File Source Output]"
+                  endId="Package\SEQC_Surname\DFT_Surname\Total Row Count.Inputs[Row Count Input 1]"
+                  name="Flat File Source Output"
+                  startId="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname.Outputs[Flat File Source Output]" />
+                <path
+                  refId="Package\SEQC_Surname\DFT_Surname.Paths[Row Count Output 1]"
+                  endId="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\SEQC_Surname\DFT_Surname\Total Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C0AD4EBF-C2DA-4A0E-A655-DE2E7F75AD93}"
+      DTS:From="Package\EXEC_Create_Objects"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\SEQC_Forename" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{FDA9D481-C567-407D-8A21-EFA2E0AF91B2}"
+      DTS:From="Package\SEQC_Forename"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\SEQC_Surname" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="181,42"
+          Id="Package\EXEC_Create_Objects"
+          TopLeft="23.5,51.5" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\SEQC_Forename\DFT_Forename"
+          TopLeft="19.5,10.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="189,68"
+          Size="189,111"
+          Id="Package\SEQC_Forename"
+          TopLeft="15,122.5" />
+        <NodeLayout
+          Size="146,42"
+          Id="Package\SEQC_Surname\DFT_Surname"
+          TopLeft="19.5,8.5" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="191,68"
+          Size="191,111"
+          Id="Package\SEQC_Surname"
+          TopLeft="16.1666666666667,263.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="111.75,93.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,29"
+              Start="0,0"
+              End="0,21.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="110.583333333333,233.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\SEQC_Forename\DFT_Forename">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="172,42"
+          Id="Package\SEQC_Forename\DFT_Forename\FF_SRC_Forenames"
+          TopLeft="7.50000000000001,5.5" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\SEQC_Forename\DFT_Forename\Total Row Count"
+          TopLeft="15,107.5" />
+        <EdgeLayout
+          Id="Package\SEQC_Forename\DFT_Forename.Paths[Flat File Source Output]"
+          TopLeft="93.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQC_Forename\DFT_Forename.Paths[Row Count Output 1]"
+          TopLeft="93.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SEQC_Forename\DFT_Forename\OLE_DST_Forename">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\SEQC_Surname\DFT_Surname">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname"
+          TopLeft="5.50000000000003,209.5" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\SEQC_Surname\DFT_Surname\FF_SRC_Surname"
+          TopLeft="7.50000000000001,5.5" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\SEQC_Surname\DFT_Surname\Total Row Count"
+          TopLeft="15,107.5" />
+        <EdgeLayout
+          Id="Package\SEQC_Surname\DFT_Surname.Paths[Row Count Output 1]"
+          TopLeft="92.25,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\SEQC_Surname\DFT_Surname.Paths[Flat File Source Output]"
+          TopLeft="91.25,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\SEQC_Surname\DFT_Surname\OLE_DST_Surname">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
