@@ -2,7 +2,8 @@ if ((select count(1) from sys.schemas where name = 'Names') = 0)
 BEGIN
 	EXEC sp_executesql N'CREATE SCHEMA [Names] AUTHORIZATION [dbo]'
 END
-GOif ((select count(1) from sys.tables where name = 'Forename' and SCHEMA_NAME(schema_id) = 'Names') = 0)
+GO
+if ((select count(1) from sys.tables where name = 'Forename' and SCHEMA_NAME(schema_id) = 'Names') = 0)
 BEGIN
 	CREATE TABLE [Names].[Forename] (
 		[Forename_ID] [int] identity(1,1) NOT NULL PRIMARY KEY
@@ -14,7 +15,8 @@ ELSE
 BEGIN
 	TRUNCATE TABLE [Names].[Forename]
 END
-GOif ((select count(1) from sys.views where name = 'vw_Forename' and SCHEMA_NAME(schema_id) = 'Names') = 0)
+GO
+if ((select count(1) from sys.views where name = 'vw_Forename' and SCHEMA_NAME(schema_id) = 'Names') = 0)
 BEGIN
 	EXECUTE(N'
 	CREATE VIEW [Names].[vw_Forename]
@@ -30,7 +32,8 @@ BEGIN
 	from
 		names.forename')
 END
-GOif ((select count(1) from sys.tables where name = 'Surname' and SCHEMA_NAME(schema_id) = 'Names') = 0)
+GO
+if ((select count(1) from sys.tables where name = 'Surname' and SCHEMA_NAME(schema_id) = 'Names') = 0)
 BEGIN
 	CREATE TABLE [Names].[Surname] (
 		[Surname_ID] [int] identity(1,1) NOT NULL PRIMARY KEY
@@ -42,7 +45,8 @@ ELSE
 BEGIN
 	TRUNCATE TABLE [Names].[Surname]
 END
-GOif ((select count(1) from sys.views where name = 'vw_Surname' and SCHEMA_NAME(schema_id) = 'Names') = 0)
+GO
+if ((select count(1) from sys.views where name = 'vw_Surname' and SCHEMA_NAME(schema_id) = 'Names') = 0)
 BEGIN
 	EXECUTE(N'
 	CREATE VIEW [Names].[vw_Surname]
@@ -58,7 +62,8 @@ BEGIN
 	from
 		names.surname')
 END
-GOif ((select count(1) from sys.procedures where name = 'USP_Random_Names' and SCHEMA_NAME(schema_id) = 'Names') <> 0)
+GO
+if ((select count(1) from sys.procedures where name = 'USP_Random_Names' and SCHEMA_NAME(schema_id) = 'Names') <> 0)
 	DROP PROCEDURE [Names].[USP_Random_Names]
 go
 -- =============================================
@@ -111,7 +116,8 @@ BEGIN
 	select name, forename, surname from #names
 
 END
-GOINSERT INTO Names.Forename (Forename, Count)
+GO
+INSERT INTO Names.Forename (Forename, Count)
 VALUES 
 	('Jack', 98007)
 	,('Thomas', 80419)
@@ -1113,7 +1119,8 @@ VALUES
 	,('Asher', 763)
 	,('Jonathon', 761)
 	,('Piotr', 759)
-GOINSERT INTO Names.Surname (Surname, Count)
+GO
+INSERT INTO Names.Surname (Surname, Count)
 VALUES
 	('Smith', 75888)
 	,('Jones', 45917)
@@ -2115,4 +2122,5 @@ VALUES
 	,('LANG', 1011)
 	,('Hawkes', 1010)
 	,('Samuel', 1010)
-GO
+GO
+
